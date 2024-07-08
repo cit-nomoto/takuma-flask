@@ -75,12 +75,14 @@ Docker-Composeが動く環境
 - `Dockerfile`: コンテナの構成ファイル、今回はpythonコンテナのみに使用
 - `docker-compose.yml`: コンテナ間の連携用
 - `requirements.txt`: pythonの必要パッケージを記載したテキスト, Dockerfileによりコンテナ構築時自動でインストールされる
+  
 flask関連
 - `app.py`：サーバの実行
 - `takuma_app/models.py`: DBテーブル関連のクラス  
 - `takuma_app/views.py`: ルーティング関連（MVCで言うところのC）
 - `takuma_app/templates`:htmlテンプレート
-- `__init__.py`,`config.py`: DB, flask_loginの設定など 
+- `__init__.py`,`config.py`: DB, flask_loginの設定など
+  
 予測関連 
 - `test.csv`: 売上予測デモ用学習データ(kaggle)
 - `takuma_app/predict/`: 売上予測実施とモデル作成などのプログラム(基本的にはGoogle Colabと同じ)
