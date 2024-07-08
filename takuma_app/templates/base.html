@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            <!-- 該当ページのタイトルが設定されていないとこちらが表示 -->
+            {% block title %}
+            このタイトルはbase.htmlテンプレートから出力されています！！
+            {% endblock %}
+        </title>
+    </head>
+    <body>
+        <header>
+            <!--該当ページのヘッダが設定されていないとこちらが表示 -->
+            {% block header %}
+            このヘッダーはbase.htmlテンプレートから出力されています！！
+            {% endblock %}
+        </header>
+        <!--flashメッセージ表示用-->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class = flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+            <!-- 該当ページのコンテンツが設定されていないとこちらが表示 -->
+            {% block content %} 
+            このコンテンツはbase.htmlテンプレートから出力されています！！
+            {% endblock %}
+    </body>
+</html>

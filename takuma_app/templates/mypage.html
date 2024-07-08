@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}マイページ{% endblock %}
+{% block content %}
+    <h1>マイページ</h1>
+    <p>ようこそ、{{ showname }}さん</p>
+    <button onclick="location.href='logout'">ログアウト</button>
+    <button onclick="location.href='mypage/edit/username'">ユーザ名変更</button>
+    <button onclick="location.href='mypage/edit/password'">パスワード変更</button>
+    <button onclick="location.href='mypage/delete'">退会</button>
+    <button onclick="location.href='mypage/predict'">予測</button>
+{% endblock %}

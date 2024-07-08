@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  takuma-db:
+    image: mysql:8.0  # 8.4 -> 8.0に修正しました
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: sampledb  
+      MYSQL_USER: user  
+      MYSQL_PASSWORD: password  
+    ports:
+      - "3306:3306"
+
+  takuma-flask:
+    build: . 
+    volumes:
+      - ./takuma_app:/takuma_app  
+    ports: 
+      - "5000:5000"
+    depends_on:
+      - takuma-db
+    environment:
+      FLASK_APP: app.py
+      FLASK_ENV: development

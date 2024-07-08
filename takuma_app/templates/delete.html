@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}退会{% endblock %}
+{% block content %}
+    <h1>退会</h1>
+    <p>さみしいよ…</p>
+    <form id="delete-form" action="{{ url_for('delete_user') }}" method="POST" style="display: none;">
+    </form>
+    <button onclick="document.getElementById('delete-form').submit();">退会する</button>
+    <button onclick="location.href='/mypage'">キャンセル</button>
+{% endblock %}
