@@ -4,8 +4,10 @@ Python(flask)+MySQLのWeb開発デモ
 Dockerを使用しFlaskとMySQLのコンテナを接続.  
 基本的なユーザ管理機能と, デモ用データを用いての売上予測に対応. 
 
+たったそれだけ, CSSもJSもないしリファクタリングもしてない
+
 ## Requirements
-Docker-Composeが動く環境
+Docker-ComposeでLinuxコンテナが動く環境
 
 ## Usage
 基本的には    
@@ -70,6 +72,7 @@ Docker-Composeが動く環境
 
 
 主なファイルは以下の通り  
+FlaskのMVTモデルに則って構成    
 
 環境構築関連
 - `Dockerfile`: コンテナの構成ファイル、今回はpythonコンテナのみに使用
