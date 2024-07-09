@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}いんでっくす{% endblock %}
 {% block content %}
-    <h1>うぇるかむ</h1>
+<div class="card card-plain">
+  <div class="card-header pb-0 test-start">
+    <h1 class="font-weight-bolder">うぇるかむ</h1>
     <a href="{{ url_for('register') }}">新規登録</a>
     <a href="{{ url_for('login') }}">ログイン</a>
-    <h2>古風なアクセスカウンタ（日付・セッション判別未実装）</h2>
-    <div>
+    <h2 class="font-weight-bolder">古風なアクセスカウンタ（日付・セッション判別未実装）</h2>
         <p>このページは{{ count.count }}回読み込まれました</p>
   </div>
+</div>
 {% endblock %}

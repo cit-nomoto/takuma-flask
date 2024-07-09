@@ -3,15 +3,30 @@
 ろぐいん
 {% endblock %}
 {% block content %}
-
-<h1>login</h1>
-<form method="POST" action="{{ url_for('login') }}">
-    <label for="">ユーザ名</label>
-    <input type="text" name="username">
-    <label for="">パスワード</label>
-    <input type="password" name="password">
-    <input type="submit" value="login">
-</form>
+<div class="containar">
+    <div class="row">
+        <div class="page-header min-vh-100">
+            <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">    
+                <div class="card card-plain">
+                <div class="card-body">
+                    <div class="card-header pb-0 test-start">
+                        <h1 class="font-weight-bolder">login</h1>
+                    </div>
+                    <form method="POST" action="{{ url_for('login') }}">
+                        <div class="mb-3">
+                            <label for="">ユーザ名</label>
+                            <input class="form-control" type="text" name="username" placeholder="username" required>
+                            <label for="">パスワード</label>
+                            <input class="form-control" type="password" name="password" placeholder="password" required>
+                            <input type="submit" value="login">
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 アカウントが無ければこちら
 <button onclick="location.href='register'">新規登録</button>
 {% endblock %}
