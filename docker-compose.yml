@@ -19,6 +19,6 @@ services:
       - "5000:5000"
     depends_on: # takuma-flaskがtakuma-dbに依存していることを明示(起動順序を制御)
       - takuma-db
-    environment:
-      FLASK_APP: app.py
+    # DBが接続待機になるまで経過してから起動(暫定的対応, waitfor itを使うか、sqlite等に変えるか、db側を速くする)
+    command: ["sh", "-c", "sleep 3 && flask run --host=0.0.0.0"]
 

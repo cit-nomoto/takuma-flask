@@ -9,5 +9,5 @@ RUN pip install -r requirements.txt
 
 # Flaskのデバッグモードを有効にする（Pythonやhtmlの変更がブラウザのリロードだけで反映される）
 ENV FLASK_DEBUG=1
-
-CMD ["flask", "run", "--host=0.0.0.0"]
+# Flaskのアプリケーションファイルを指定
+ENV FLASK_APP=app.py
