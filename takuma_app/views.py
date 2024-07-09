@@ -8,8 +8,6 @@ from takuma_app import app, db
 from takuma_app.models import User, Count
 # 売上予測関数
 from takuma_app.predict.predict_sales import predict_sales 
-# パスワードのハッシュ化
-import getpass
 
 # ヘルパー関数
 def get_user_by_username(username): # ユーザ名からユーザを取得
