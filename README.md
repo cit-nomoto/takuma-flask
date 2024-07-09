@@ -39,7 +39,7 @@ Docker-ComposeでLinuxコンテナが動く環境
 ├── requirements.txt
 └── takuma_app
     ├── __init__.py
-    ├── app.py
+    ├── main.py
     ├── config.py
     ├── models.py
     ├── predict
@@ -80,7 +80,7 @@ FlaskのMVTモデルに則って構成
 - `requirements.txt`: pythonの必要パッケージを記載したテキスト, Dockerfileによりコンテナ構築時自動でインストールされる
   
 flask関連
-- `app.py`：サーバの実行
+- `main.py`：サーバの実行
 - `takuma_app/models.py`: DBテーブル関連のクラス  
 - `takuma_app/views.py`: ルーティング関連（MVCで言うところのC）
 - `takuma_app/templates`:htmlテンプレート
