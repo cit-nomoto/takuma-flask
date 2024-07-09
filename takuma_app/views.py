@@ -8,17 +8,23 @@ from takuma_app import app, db
 from takuma_app.models import User, Count
 # 売上予測関数
 from takuma_app.predict.predict_sales import predict_sales 
+# パスワードのハッシュ化
+import getpass
+
+# ヘルパー関数
+def get_user_by_username(username): # ユーザ名からユーザを取得
+    return User.query.filter_by(username=username).first()
+
+def update_current_user(): # 現在のユーザ情報を更新
+    setattr(current_user, field, value) # ユーザ情報を更新
+    db.session.commit()
 
 # エンドポイントを記載
 @app.route('/')
 def index():
     #　アクセスカウンタの取得
-    count = Count.query.filter_by(id=1).first()
-    if count is None:
-        count = Count(id=1, count=1)
-        db.session.add(count)
-    else:
-        count.count += 1
+    count = Count.query.filter_by(id=1).first() or Count(id=1, count=0)
+    count.count += 1
     db.session.commit()
     # render_templateでtemplatesフォルダ内のhtmlを返す
     return render_template('index.html', count=count)
@@ -28,12 +34,11 @@ def register():
     # POSTされた時ユーザ登録処理へ
     if request.method == 'POST':
         # フォームからユーザ名とパスワードを取得
-        username = request.form['username']
-        password = request.form['password']
+        (username, password) = (request.form['username'], request.form['password'])
         #　クエリ実行, usernamが一致するレコードの一番上を取得
         exist_user = User.query.filter_by(username=username).first()
         # 該当した場合メッセージを出力してリダイレクト
-        if exist_user is not None:
+        if exist_user :
             flash('既にそのユーザー名が存在します') 
             return redirect('/register')
         # userの追加
@@ -48,8 +53,7 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        (username, password) = (request.form['username'], request.form['password'])
         user = User.query.filter_by(username=username).first()
         if user is None or user.password != password:
             flash('ユーザーが存在しないか、パスワードが間違っています')
@@ -61,7 +65,7 @@ def login():
     return render_template('login.html')
 
 @app.route('/logout')
-@login_required
+@login_required # ログインしていないとアクセスできない
 def logout():
     # セッション情報の削除
     logout_user()
@@ -80,7 +84,7 @@ def mypage():
 def edit_username():
     if request.method == 'POST':
         new_username = request.form['new_username']
-        current_user.username = new_username
+        update_current_user('username', new_username)
         db.session.commit()
         return redirect('/mypage')
     return render_template('edit/username.html')
@@ -91,7 +95,7 @@ def edit_password():
     if request.method == 'POST':
         new_password = request.form['new_password']
         # 現在のユーザのレコードを更新
-        current_user.password = new_password
+        update_current_user('password', new_password)
         db.session.commit() # 
         return redirect('/mypage')
     return render_template('edit/password.html')
@@ -110,8 +114,7 @@ def delete_user():
 @login_required
 def predict():
     if request.method == 'POST':
-        store_id = int(request.form['store_id'])
-        item_id = int(request.form['item_id'])
+        (store_id, item_id) = (int(request.form['store_id']), int(request.form['item_id']))
         date = request.form['date']
         
         # /takuma_app/predict/predict_sales.pyから予測を行う関数を呼び出す
@@ -121,5 +124,4 @@ def predict():
 
         # テンプレートに代入して出力
         return render_template('predict.html', predictions=predictions, prediction_message=prediction_message)
-
     return render_template('predict.html')
