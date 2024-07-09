@@ -4,5 +4,8 @@
     <h1>うぇるかむ</h1>
     <a href="{{ url_for('register') }}">新規登録</a>
     <a href="{{ url_for('login') }}">ログイン</a>
+    <h2>古風なアクセスカウンタ（日付・セッション判別未実装）</h2>
+    <div>
+        <p>このページは{{ count.count }}回読み込まれました</p>
   </div>
 {% endblock %}

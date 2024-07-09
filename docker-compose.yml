@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   takuma-db:
-    image: mysql:8.0  # 8.4 -> 8.0に修正しました
+    image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: sampledb  
@@ -17,8 +17,8 @@ services:
       - ./takuma_app:/takuma_app  
     ports: 
       - "5000:5000"
-    depends_on:
+    depends_on: # takuma-flaskがtakuma-dbに依存していることを明示(起動順序を制御)
       - takuma-db
     environment:
       FLASK_APP: app.py
-      FLASK_ENV: development
+

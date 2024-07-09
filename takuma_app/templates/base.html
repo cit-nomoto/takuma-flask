@@ -2,16 +2,16 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8">
+        <!-- 該当ページのタイトルが設定されていないとこちらが表示 -->
         <title>
             {% block title %}
-            <!-- 該当ページのタイトルが設定されていないとこちらが表示 -->
             このタイトルはbase.htmlテンプレートから出力されています！！
             {% endblock %}
         </title>
     </head>
     <body>
+        <!--該当ページのヘッダが設定されていないとこちらが表示 -->
         <header>
-            <!--該当ページのヘッダが設定されていないとこちらが表示 -->
             {% block header %}
             このヘッダーはbase.htmlテンプレートから出力されています！！
             {% endblock %}

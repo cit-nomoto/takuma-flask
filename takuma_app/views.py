@@ -5,21 +5,29 @@ from flask_login import login_user, logout_user, login_required, UserMixin, Logi
 # 必須モジュールのロード
 from takuma_app import app, db 
 # Userテーブルモデルの読み込み(ORM用)
-from takuma_app.models import User 
+from takuma_app.models import User, Count
 # 売上予測関数
 from takuma_app.predict.predict_sales import predict_sales 
 
 # エンドポイントを記載
 @app.route('/')
 def index():
+    #　アクセスカウンタの取得
+    count = Count.query.filter_by(id=1).first()
+    if count is None:
+        count = Count(id=1, count=1)
+        db.session.add(count)
+    else:
+        count.count += 1
+    db.session.commit()
     # render_templateでtemplatesフォルダ内のhtmlを返す
-    return render_template('index.html')
+    return render_template('index.html', count=count)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     # POSTされた時ユーザ登録処理へ
     if request.method == 'POST':
-        # 
+        # フォームからユーザ名とパスワードを取得
         username = request.form['username']
         password = request.form['password']
         #　クエリ実行, usernamが一致するレコードの一番上を取得
