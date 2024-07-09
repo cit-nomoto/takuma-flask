@@ -1,3 +1,4 @@
+"""必須モジュールの読み込み"""
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -14,13 +15,13 @@ login_manager.login_view = 'login'  # ログインページのエンドポイン
 
 from . import views, models
 
-# ログインセッションの管理
 @login_manager.user_loader # ログインマネージャのユーザローダー
 def load_user(user_id):
+    """ユーザIDからユーザ情報を取得する"""
     return models.User.query.get(int(user_id)) # models.pyからUserテーブルを取得
 
-# models.pyからテーブルを作成
 def create_tables():
+    """テーブルを作成する"""
     with app.app_context(): # アプリケーションコンテキストを取得
         db.create_all() # テーブルを作成
 

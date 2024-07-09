@@ -1,9 +1,11 @@
+"""モデルの訓練を行うモジュール"""
 import pandas as pd # データフレーム操作、csvの読み込み用
 from sklearn.ensemble import RandomForestRegressor # 機械学習アルゴリズム
 import joblib # モデルの保存用
 
 # データの前処理を行う関数
-def preprocess_data(data):
+def preprocess_train_data(data):
+    """訓練データの前処理を行う関数"""
     data['year'] = data['date'].dt.year # date型を要素ごとに割当
     data['month'] = data['date'].dt.month
     data['day'] = data['date'].dt.day
@@ -11,10 +13,11 @@ def preprocess_data(data):
     return data
 
 def make_model():
+    """モデルの作成を行う関数"""
     # データの読み込み
     train_data = pd.read_csv('/takuma_app/train.csv', parse_dates=['date'])
     # 前処理の実施
-    train_data = preprocess_data(train_data)
+    train_data = preprocess_train_data(train_data)
 
     # 特徴量とターゲットの選定
     features = ['store', 'item', 'year', 'month', 'day', 'dayofweek']

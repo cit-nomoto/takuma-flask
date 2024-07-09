@@ -1,7 +1,6 @@
-import os # ファイルや環境変数の読み込み
-
-# Config（現状mysqlの接続情報だけ）
+"""コンフィグを記載したモジュール"""
 class Config:
+    """コンフィグクラス"""
     SECRET_KEY = 'test-secret-key'
     # db種別://ユーザ名:パスワード@接続先/db名
     # docker-composeでは、localhostの代わりにコンテナ名が接続先になる
