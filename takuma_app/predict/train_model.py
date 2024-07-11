@@ -23,12 +23,14 @@ def make_model():
     features = ['store', 'item', 'year', 'month', 'day', 'dayofweek']
     target = 'sales'
 
-    X_train = train_data[features]
+    x_train = train_data[features]
     y_train = train_data[target]
-
-    # モデルのトレーニング 生成に時間がかかるので精度をなるべく低くした、デモ用
+    # モデルのトレーニング
+    # 生成に時間がかかるので精度を極限まで低くした、デモ用
+    # 理想的にはn_estimators=100以上、random_state=42あたりが精度が高い
+    # しかし、初回の演算時間と生成されるモデルの容量も大きくなるので、今回の値に
     model = RandomForestRegressor(n_estimators=5, random_state=0)
-    model.fit(X_train, y_train)
+    model.fit(x_train, y_train)
 
     # モデルの保存
     joblib.dump(model, '/takuma_app/predict/sales_model.pkl')
