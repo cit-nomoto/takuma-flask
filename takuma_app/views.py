@@ -32,6 +32,7 @@ def register():
     # POSTされた時ユーザ登録処理へ
     if request.method == 'POST':
         # フォームからユーザ名とパスワードを取得
+        # ちょっと癖のある変数定義, (x, y) = (a, b) は x = a, y = b と同義
         (username, password) = (request.form['username'], request.form['password'])
         #　クエリ実行, usernameが一致するレコードの一番上を取得
         exist_user = User.query.filter_by(username=username).first()
